@@ -1,0 +1,28 @@
+/* Tab title color */
+[role="tab"] {
+  color: black !important;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Active tab title color */
+[role="tab"][aria-selected="true"] {
+  color: #d97706 !important;
+}
+
+/* Inactive tab background */
+[role="tab"] {
+  background-color: white !important;
+  color: black !important;
+}
+
+/* Active tab background */
+[role="tab"][aria-selected="true"] {
+  background-color: #fbbf24 !important;
+  color: black !important;
+}
+
+/* Hover background */
+[role="tab"]:hover {
+  background-color: #fde68a !important;
+}

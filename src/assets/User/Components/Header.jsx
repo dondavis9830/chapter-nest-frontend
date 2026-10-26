@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function Header() {
+  const user=JSON.parse(sessionStorage.getItem('user'))
+
   const navigate=useNavigate()
   return (
     <div className='sticky top-0 z-100'>
@@ -21,16 +23,25 @@ export default function Header() {
           <FaFacebook className='text-2xl dark:text-white'/>
           <FaXTwitter className='text-2xl dark:text-white'/>
         </div>
-        <Button onClick={()=>navigate('/login')}  >Login</Button>
+        {
+          user ?
+          <div>
+            <Button onClick={()=>navigate('/profile/1')}  >Profile</Button>
+          </div>
+          :
+          <div>
+            <Button onClick={()=>navigate('/login')}  >Login</Button>
+          </div>
+        }
       </div>
     </Navbar>
-    <navbar>
+    <nav>
       <div className='flex justify-center gap-5 bg-mist-800 py-2'>
         <button onClick={()=>navigate('/')} className=' text-xl font-bold text-white'>HOME</button>
         <button onClick={()=>navigate('/books')} className=' text-xl font-bold text-white'>BOOKS</button>
         <button onClick={()=>navigate('/contact')} className=' text-xl font-bold text-white'>CONTACT</button>
       </div>
-    </navbar>
+    </nav>
     </div>
   )
 }

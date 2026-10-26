@@ -1,8 +1,10 @@
 import React from 'react'
+import Header from '../Components/Header'
 
 export default function Books() {
   return (
     <div>
+          <Header/>
         {/* Title header */}
         <div className="">
           <section className="flex h-screen overflow-hidden">

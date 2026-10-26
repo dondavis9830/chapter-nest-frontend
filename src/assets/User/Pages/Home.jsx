@@ -2,6 +2,8 @@ import React from 'react'
 import { useNavigate } from "react-router-dom";
 import gsap from 'gsap'
 import { useEffect, useRef } from 'react'
+import Header from '../Components/Header';
+
 
 export default function Home() {
   const headingRef = useRef(null)
@@ -25,7 +27,7 @@ export default function Home() {
   const navigate=useNavigate()
   return (
     <div>
-      
+    <Header/>
         <header className="bg-[url('https://static.vecteezy.com/system/resources/thumbnails/051/266/432/small_2x/a-library-with-many-books-on-shelves-and-a-table-photo.jpg')] bg-cover bg-center bg-no-repeat min-h-screen flex justify-center items-center">
           <div className=" font-bold bg-white/50 max-w-3xl min-h-44 rounded-xl flex flex-col justify-center p-5 -mt-20">
             <h1 ref={headingRef} className="md:text-4xl text-black overflow-hidden">

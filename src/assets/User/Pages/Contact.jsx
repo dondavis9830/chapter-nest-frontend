@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import Header from '../Components/Header'
 
 export default function Contact() {
 
@@ -11,13 +12,12 @@ useEffect(() => {
   const interval = setInterval(() => {
     setColor(colors[Math.floor(Math.random() * colors.length)])
   }, 1000)
-
   return () => clearInterval(interval)
 }, [])
 
   return (
-    <div style={{ backgroundColor: color }} className="min-h-screen transition-colors duration-700 ">
-      
+    <div style={{ backgroundColor: color }} className="min-h-152 transition-colors duration-700 ">
+      <Header/>
       {/* contact page */}
       <main className='grid grid-cols-2 py-10 px-50 shadow-2xl '>
         <div className='bg-cyan-950/80 px-5 rounded-l-2xl'>
