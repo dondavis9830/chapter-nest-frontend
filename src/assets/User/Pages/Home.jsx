@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import gsap from 'gsap'
 import { useEffect, useRef } from 'react'
 import Header from '../Components/Header';
+import { getLatestBookAPI } from '../../../Services/APIServices';
 
 
 export default function Home() {
+  const [latestBooks,setLatestBooks]=useState([])
+  const getLatestBooks=async()=>{
+    try{
+      const res=await getLatestBookAPI()
+      console.log(res.data.latestBook);
+      setLatestBooks(res.data.latestBook)
+      
+    }
+    catch(err){
+      console.log(err);
+      
+    }
+  }
+  useEffect(()=>{getLatestBooks()},[])
   const headingRef = useRef(null)
   useEffect(() => {
     const animation = gsap.fromTo(
@@ -56,9 +71,32 @@ export default function Home() {
           <div className="flex flex-col justify-center items-center ">
             <h1 className="text-3xl my-3 font-bold">Explore Our Latest Collection</h1>
             {/* maping from collections */}
+               <section className='flex flex-1 flex-wrap justify-center gap-5 lg:justify-start'>
+        {
+            latestBooks.length>0? 
+            latestBooks.map(item=>(
+                            <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-50">
+  <div className="relative h-60 m-2.5 overflow-hidden text-white rounded-md">
+    <img key={item} src={item.imageUrl} width={500} alt="card-image" className="h-full w-full object-cover" />
+  </div>
+  <div className="p-4">
+    <h6 key={item} className="mb-2 text-slate-800 text-xl font-semibold">
+    {item.title}
+    </h6>
+    <p key={item} className="text-slate-600 leading-normal font-light">
+    {item.author}
+    </p>
+  </div>
+</div>
+            ))
+            :
+            "no Books"
+        }
+
+      </section>
 
 
-            <button className="bg-rose-600 p-2 rounded-xl w-44 text-white font-bold">Explore More</button>
+            <button onClick={()=>navigate('/books')} className="bg-rose-600 p-2 rounded-xl w-44 text-white font-bold">Explore More</button>
           </div>
         </section>
 

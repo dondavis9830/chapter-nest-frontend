@@ -27,7 +27,10 @@ export default function Auth({insideRegister}) {
     try{
       const res=await loginAPI(userDetails)
       console.log(res);
-      sessionStorage.setItem('user',JSON.stringify(userDetails))
+      if(res.status==200){
+      sessionStorage.setItem('user',JSON.stringify(res.data.existingUser))
+      sessionStorage.setItem('userToken',res.data.token)
+      }
       navigate('/')
     }
     catch(err){

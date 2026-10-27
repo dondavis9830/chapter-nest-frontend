@@ -7,10 +7,11 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function Header() {
-  const user=JSON.parse(sessionStorage.getItem('user'))
+  const userToken=sessionStorage.getItem('userToken')
 
   const navigate=useNavigate()
   return (
+    
     <div className='sticky top-0 z-100'>
       <Navbar fluid className='p-5'>
       <NavbarBrand >
@@ -24,7 +25,7 @@ export default function Header() {
           <FaXTwitter className='text-2xl dark:text-white'/>
         </div>
         {
-          user ?
+          userToken ?
           <div>
             <Button onClick={()=>navigate('/profile/1')}  >Profile</Button>
           </div>
