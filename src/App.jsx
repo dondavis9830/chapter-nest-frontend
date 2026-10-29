@@ -27,7 +27,7 @@ function App() {
         <Route path='/register' element={<Auth insideRegister/>}/>
 
         {/* role user */}
-        <Route path='/profile/:id' element={<ProfilePage/>}/>
+        <Route path='/profile' element={<ProfilePage/>}/>
         <Route path='/books/:id' element={<View/>}/>
         <Route path='/success' element={<PaymentSuccess/>}/>
         <Route path='/cancel' element={<PaymentFail/>}/>

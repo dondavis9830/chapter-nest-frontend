@@ -16,10 +16,10 @@ useEffect(() => {
 }, [])
 
   return (
-    <div style={{ backgroundColor: color }} className="min-h-152 transition-colors duration-700 ">
+    <div className="min-h-152 transition-colors duration-700 bg-slate-200">
       <Header/>
       {/* contact page */}
-      <main className='grid grid-cols-2 py-10 px-50 shadow-2xl '>
+      <main className='grid grid-cols-2 py-10 px-50 shadow-3xl '>
         <div className='bg-cyan-950/80 px-5 rounded-l-2xl'>
           <h1 style={{ color }} className='text-6xl text-white p-2 font-bold text-start font-[Baskervville]' >Contact Us</h1>
           <p className=' text-white text-bold'>Fill up the form and our team will get back to within 24 hours</p>

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from 'react-router-dom';
 import { loginAPI, registerAPI } from '../../Services/APIServices';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 
 export default function Auth({insideRegister}) {
   console.log(insideRegister);   //value:true -- (props)
@@ -113,9 +115,19 @@ export default function Auth({insideRegister}) {
               <hr className="flex-1 border" />
             </div>
 
-            <Link>
-              <div type="submit" className="mb-3 w-full rounded-lg py-3 font-semibold bg-lime-100 flex justify-center items-center gap-4" > <FcGoogle className='text-2xl'/> Sign in with google </div>
-            </Link>
+           <div className='my-2'>
+             <GoogleLogin
+               onSuccess={credentialResponse => {
+                 console.log(credentialResponse);
+                 let decode=jwtDecode(credentialResponse.credential)
+                 console.log(decode);
+               }}
+               onError={() => {
+                 console.log('Login Failed');
+               }}
+             />
+           </div>
+
             <button onClick={handleLogin} type="button" className="w-full rounded-lg bg-lime-700 py-3 font-semibold text-white transition hover:bg-lime-800" > Login </button>
 
             <p className="mt-6 text-center text-sm text-gray-600">

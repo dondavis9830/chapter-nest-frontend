@@ -4,9 +4,17 @@ import { HiAdjustments, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import './ProfilePage.css'
 import Header from '../Components/Header';
-
+import { BiRupee } from "react-icons/bi";
 
 export default function ProfilePage() {
+  const book={
+  "title": 'The Alchemist',
+  "author": 'Paulo Coelho',
+  "imageUrl": 'https://covers.openlibrary.org/b/isbn/9780062315007-L.jpg',
+  "price": '299',
+  'abstract': 'A philosophical novel about following dreams and listening to one\'s heart.',
+  "status": 'pending',
+  }
 
   return (
     <div className=''>
@@ -22,6 +30,7 @@ export default function ProfilePage() {
       </div>
       <div className='container mx-auto flex justify-end mt-5'>
         <button className='bg-sky-400 px-2 py-1 font-bold rounded-sm'>Edit</button>
+        
       </div>
 
       {/* main section tab */}
@@ -30,7 +39,6 @@ export default function ProfilePage() {
           <TabItem active title="Upload Book" icon={HiUserCircle}>
             <div className="p-5 bg-sky-200 w-full">
             <h1 className="text-3xl my-3 font-bold text-center">Upload Book Details</h1>
-      
               <div className="grid grid-cols-12 gap-4 mt-4">
                 <div className="col-span-6">
                   <input type="text" placeholder="Book Title" className="w-full rounded-lg bg-amber-50 p-2 outline-none mb-1" />
@@ -58,13 +66,55 @@ export default function ProfilePage() {
 
           <TabItem title="Upload Book Status" icon={MdDashboard}>
             <div className="p-5 bg-sky-200 w-full">
-
+              <div className='flex justify-center items-center rounded-lg gap-4 '>
+                         <div className='flex shadow-2xl p-10 bg-white rounded-xl'>
+                           <div className='relative w-72'>
+                            <img src={book.imageUrl} alt="book front page" />
+                          </div>
+                          <div className='my-auto'>
+                            <h1 className='font-bold text-4xl'>{book.title}</h1>
+                            <h1 className='text-sky-800 text-2xl mt-1 font-bold'>{book.author}</h1>
+                            <div className='flex justify-start items-center text-sky-800 text-2xl'>
+                              <BiRupee/>
+                              <h1 className=' mt-1 font-bold '> {book.price}</h1>
+                            </div>
+                            <hr className='my-3' />
+                            <p className='text-xl mt-2'>Abstract: <span className='font-bold'>{book.abstract}</span></p>
+                            <hr className='my-3' />
+                            <div className='flex justify-between gap-5 mt-2'>
+                              <img width={100} src="https://st.depositphotos.com/1186248/2153/i/950/depositphotos_21538099-stock-photo-pending-review-stamp.jpg" alt="" />
+                              <button className='bg-red-800 h-10 rounded-sm text-white text-xl px-2 py-1'>Delete</button>
+                            </div>
+                          </div>
+                         </div>
+                          
+              </div>
             </div>
           </TabItem>
 
           <TabItem title="Purchase History" icon={HiAdjustments}>
             <div className="p-5 bg-sky-200 w-full">
-
+              <div className='flex justify-center items-center rounded-lg gap-4 '>
+                <div className='flex shadow-2xl p-10 bg-white rounded-xl'>
+                  <div className='relative w-72'>
+                    <img src={book.imageUrl} alt="book front page" />
+                  </div>
+                  <div className='my-auto'>
+                    <h1 className='font-bold text-4xl'>{book.title}</h1>
+                    <h1 className='text-sky-800 text-2xl mt-1 font-bold'>{book.author}</h1>
+                    <div className='flex justify-start items-center text-sky-800 text-2xl'>
+                      <BiRupee/>
+                      <h1 className=' mt-1 font-bold '> {book.price}</h1>
+                    </div>
+                      <hr className='my-3' />
+                      <p className='text-xl mt-2'>Abstract: <span className='font-bold'>{book.abstract}</span></p>
+                      <hr className='my-3' />
+                      <div className='flex justify-between gap-5 mt-2'>
+                      <img width={100} src="" alt="" />
+                    </div>
+                  </div>
+                </div>        
+              </div>
             </div>
           </TabItem>
 

@@ -23,37 +23,41 @@ export default function View() {
     <div>
       <Header/>
 
-      <section>
+      <section className='bg-mist-300'>
         {
           book &&
-          <div className='flex p-5 border-2 rounded-lg m-3 gap-4'>
-            <div className='relative w-52'>
-              <img src={book.imageUrl} alt="" />
+          <div className='flex justify-center items-center py-24 rounded-lg gap-4 '>
+           <div className='flex shadow-2xl p-10 bg-white rounded-xl'>
+             <div className='relative w-72'>
+              <img src={book.imageUrl} alt="book front page" />
             </div>
-            <div>
-              <h1 className='font-bold'>{book.title}</h1>
-              <h1>{book.author}</h1>
-              <div className='grid grid-cols-3 gap-4'>
-                <div className='col-1'>
-                  <h1>Publisher:{book.publisher}</h1>
-                  <h1>Category:{book.category}</h1>
-                  <h1>Seller:{book?.seller}</h1>
+            <div className='my-auto'>
+              <h1 className='font-bold text-4xl'>{book.title}</h1>
+              <h1 className='text-sky-800 text-2xl mt-1 font-bold'>{book.author}</h1>
+              <hr className='my-3' />
+              <div className='grid grid-cols-3 gap-6'>
+                <div className=''>
+                  <h1 className='text-xl'>Publisher: <span className='font-bold'>{book.publisher}</span></h1>
+                  <h1 className='text-xl'>Category: <span className='font-bold'>{book.category}</span></h1>
+                  <h1 className='text-xl'>Seller: <span className='font-bold'>{book?.seller}</span></h1>
                 </div>
                 <div>
-                  <h1>Language:{book.language}</h1>
-                  <h1>ISBN:{book.isbn}</h1>
+                  <h1 className='text-xl'>Language: <span className='font-bold'>{book.language}</span></h1>
+                  <h1 className='text-xl'>ISBN: <span className='font-bold'>{book.isbn}</span></h1>
                 </div>
                 <div>
-                  <h1>No.Of Pages:{book.noofpages}</h1>
-                  <h1>ISBN:{book.price}</h1>
+                  <h1 className='text-xl'>No.Of Pages: <span className='font-bold'>{book.noofpages}</span></h1>
+                  <h1 className='text-xl'>Price: <span className='font-bold'>{book.price}</span></h1>
                 </div>
               </div>
-              <p>Abstract:{book.abstract}</p>
+              <p className='text-xl mt-2'>Abstract: <span className='font-bold'>{book.abstract}</span></p>
+              <hr className='my-3' />
               <div className='flex justify-end gap-5 mt-2'>
-                <button className='bg-sky-800 w-10 rounded-sm '>Back</button>
-                <button className='w-20 flex justify-center items-center bg-emerald-800 rounded-sm'>Buy <BiRupee/> {book.dprice}</button>
+                <button className='bg-sky-800  rounded-sm text-white text-xl px-2 py-1'>Back</button>
+                <button className=' flex justify-center items-center bg-emerald-800 rounded-sm text-white px-2 py-1 text-xl'>Buy <BiRupee/> {book.dprice}</button>
               </div>
             </div>
+           </div>
             
           </div>
         }

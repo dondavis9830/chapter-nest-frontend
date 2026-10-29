@@ -1,15 +1,30 @@
 import React from 'react'
-import { Button, Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from "flowbite-react";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  DropdownDivider,
+  DropdownHeader,
+  DropdownItem,
+  Navbar,
+  NavbarBrand
+} from "flowbite-react";
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 
 
+
 export default function Header() {
   const userToken=sessionStorage.getItem('userToken')
-
+  const user=JSON.parse(sessionStorage.getItem('user'))
   const navigate=useNavigate()
+
+  const logout=()=>{
+    sessionStorage.clear()
+    navigate('/')
+  }
   return (
     
     <div className='sticky top-0 z-100'>
@@ -27,7 +42,16 @@ export default function Header() {
         {
           userToken ?
           <div>
-            <Button onClick={()=>navigate('/profile/1')}  >Profile</Button>
+            {/* <Button onClick={()=>navigate('/profile/1')}  >Profile</Button> */}
+            <Dropdown arrowIcon={false} inline label={ <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded /> } >
+              <DropdownHeader>
+                <span className="block text-sm">{user.username}</span>
+                <span className="block truncate text-sm font-medium">{user.email}</span>
+              </DropdownHeader>
+              <DropdownItem onClick={()=>navigate('/profile')} >profile</DropdownItem>
+              <DropdownDivider />
+              <DropdownItem onClick={logout}>Logout out</DropdownItem>
+            </Dropdown>
           </div>
           :
           <div>
