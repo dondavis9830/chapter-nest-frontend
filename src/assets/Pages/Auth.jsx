@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from 'react-router-dom';
-import { loginAPI, registerAPI } from '../../Services/APIServices';
+import { GoogleAuthenticationloginAPI, loginAPI, registerAPI } from '../../Services/APIServices';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 
@@ -13,12 +13,37 @@ export default function Auth({insideRegister}) {
     email:'',
     password:''
   })
-
+  console.log(userDetails);
+  
+  const handleGoogleLogin=async(credential)=>{
+    const {name,email,picture}=credential
+    const googleUserData={
+      username:name,
+      email:email,
+      picture:picture,
+      password:'google-auth'
+    }
+    try{
+      const res=await GoogleAuthenticationloginAPI(googleUserData)
+      console.log(res);
+      if(res.status===200 || res.status===201){
+        sessionStorage.setItem('user',JSON.stringify(res.data.existingUser || res.data.newUser))
+        sessionStorage.setItem('userToken',res.data.token)
+        navigate('/')
+      }
+    }
+    catch(err){
+      console.log(err);   
+    }
+  }
   
   const handleRegister=async()=>{
     try{
       const res=await registerAPI(userDetails)
       console.log(res);
+      if(res.status===200){
+        navigate('/login')
+      }
     }
     catch(err){
       console.log(err);
@@ -26,14 +51,23 @@ export default function Auth({insideRegister}) {
   }
 
   const handleLogin=async()=>{
+    const {email,password} = userDetails
     try{
-      const res=await loginAPI(userDetails)
+      const res=await loginAPI({email,password})
       console.log(res);
       if(res.status==200){
-      sessionStorage.setItem('user',JSON.stringify(res.data.existingUser))
-      sessionStorage.setItem('userToken',res.data.token)
+        sessionStorage.setItem('user',JSON.stringify(res.data.existingUser))
+        sessionStorage.setItem('userToken',res.data.token)
+        if(res.data.existingUser.role==="admin"){
+          navigate('/admin')
+        }
+        else if(res.data.existingUser.role==="user"){
+          navigate('/')
+        }
+  
       }
-      navigate('/')
+
+      
     }
     catch(err){
       console.log(err);
@@ -121,6 +155,7 @@ export default function Auth({insideRegister}) {
                  console.log(credentialResponse);
                  let decode=jwtDecode(credentialResponse.credential)
                  console.log(decode);
+                 handleGoogleLogin(decode)
                }}
                onError={() => {
                  console.log('Login Failed');

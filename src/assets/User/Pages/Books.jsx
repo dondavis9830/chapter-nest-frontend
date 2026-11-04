@@ -10,6 +10,8 @@ export default function Books() {
   const [books,setBooks]=useState([])
   const [dummybooks,setDummyBooks]=useState([])
   const [search,setSearch]=useState('')
+  const [token,setToken]=useState('')
+
   const getAllBooks=async()=>{
     try{
       const res=await getAllBookAPI()
@@ -26,13 +28,15 @@ export default function Books() {
     setBooks(dummybooks.filter(book=>book.title?.toLowerCase().includes(search.toLowerCase())))
   },[search])
 
-  useEffect(()=>{getAllBooks()},[])
+  useEffect(()=>{getAllBooks();setToken(sessionStorage.getItem('userToken'))},[token])
 
   return (
     <div>
           <Header/>
         {/* Title header */}
-        <div className="">
+           {
+            token?
+            <div className="">
           <section className="flex h-screen overflow-hidden">
             <div className="fixed left-0 top-31 h-screen w-65 border-r-2 ">
               {/* Sidebar content filter method */}
@@ -98,7 +102,11 @@ export default function Books() {
             </div>
           </section>
 
-        </div>    
+        </div> :
+        <div>
+          <h1>plz login</h1>
+        </div>
+           }
       </div>
   )
 }

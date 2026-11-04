@@ -13,12 +13,18 @@ import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 
 export default function Header() {
+  const [picture,setPicture]=useState('')
   const userToken=sessionStorage.getItem('userToken')
   const user=JSON.parse(sessionStorage.getItem('user'))
+  console.log(user);
+  // useEffect(()=>{setPicture(user.picture)},[])
+  
   const navigate=useNavigate()
 
   const logout=()=>{
@@ -43,7 +49,7 @@ export default function Header() {
           userToken ?
           <div>
             {/* <Button onClick={()=>navigate('/profile/1')}  >Profile</Button> */}
-            <Dropdown arrowIcon={false} inline label={ <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded /> } >
+            <Dropdown arrowIcon={false} inline label={ <Avatar alt="pic" img='' rounded /> } >
               <DropdownHeader>
                 <span className="block text-sm">{user.username}</span>
                 <span className="block truncate text-sm font-medium">{user.email}</span>
